@@ -1,0 +1,239 @@
+import { SileroCaptureDetector } from './silero-capture.js';
+export class EmmaMicrophone {
+  constructor({ onState, onUtterance, shouldIgnore, endpointMode = 'silero', onWarning, onError }) {
+    this.endpointMode = endpointMode;
+    this.onWarning = onWarning;
+    this.onError = onError;
+    this.onState = onState;
+    this.onUtterance = onUtterance;
+    this.shouldIgnore = shouldIgnore;
+    this.generation = 0;
+    this.stream = null;
+    this.context = null;
+    this.node = null;
+    this.vad = new AdaptiveEndpointDetector();
+  }
+
+  async start() {
+    const generation = ++this.generation;
+    const requested = navigator.mediaDevices.getUserMedia({
+      audio: { channelCount: 1, echoCancellation: false, noiseSuppression: false, autoGainControl: false }, video: false
+    });
+    requested.then(stream=>{ if(generation !== this.generation) stream.getTracks().forEach(track=>track.stop()); },()=>{});
+    let stream;
+    try { stream = await withTimeout(requested, 15000,
+      'マイクの開始が完了しませんでした。サイト設定でマイクを許可し、Androidで他アプリのバブルやオーバーレイが表示されている場合は閉じてから、もう一度お試しください。'); }
+    catch(error) { if(generation === this.generation) this.generation++; throw error; }
+    if(generation !== this.generation) return;
+    this.stream = stream;
+    const context = this.context = new AudioContext({ latencyHint: 'interactive' });
+    if (this.context.state === 'suspended') {
+      await withTimeout(
+        this.context.resume(),
+        5000,
+        'マイク音声処理を開始できませんでした。「会話を始める」をもう一度押してください。'
+      );
+    }
+    if(generation !== this.generation) return;
+    await withTimeout(
+      context.audioWorklet.addModule(new URL('../worklets/pcm-capture-worklet.js', import.meta.url)),
+      15000,
+      'マイク音声処理の読み込みが完了しませんでした。ページを再読み込みして、もう一度お試しください。'
+    );
+    if(generation !== this.generation) return;
+    if(this.endpointMode === 'silero') {
+      try {
+        this.vadAbort=new AbortController();
+        const detector=await SileroCaptureDetector.create({
+          signal:this.vadAbort.signal,
+          sampleRate:context.sampleRate,
+          onResult:result=>{if(generation===this.generation && !this.shouldIgnore?.())this.handleResult(result);},
+          onError:error=>{if(generation===this.generation)this.onError?.(error);}
+        });
+        if(generation!==this.generation){detector.close();return;}
+        this.vad=detector;
+      } catch(error) {
+        if(generation!==this.generation)return;
+        this.vad=new AdaptiveEndpointDetector();
+        this.onWarning?.('声の判定を準備できなかったため、今回は従来方式で会話します。設定で判定方式を変更できます。');
+      }
+    } else this.vad=new AdaptiveEndpointDetector();
+    const source = this.context.createMediaStreamSource(this.stream);
+    this.node = new AudioWorkletNode(this.context, 'emma-pcm-capture');
+    const silent = this.context.createGain();
+    silent.gain.value = 0;
+    source.connect(this.node).connect(silent).connect(this.context.destination);
+    this.node.port.onmessage = (event) => this.handleFrame(event.data);
+    this.onState?.('listening');
+  }
+
+  handleFrame(frame) {
+    if (this.shouldIgnore?.()) {
+      this.vad.resetSpeechOnly();
+      return;
+    }
+    const result = this.vad.push(frame, this.context.sampleRate, performance.now());
+    this.handleResult(result);
+  }
+
+  handleResult(result) {
+    if(!this.context)return;
+    if (result.event === 'speech-start') this.onState?.('endpoint');
+    if (result.event === 'utterance') {
+      const downsampled = resampleLinear(result.audio, this.context.sampleRate, 16000);
+      if (downsampled.length >= 16000 * 0.32) this.onUtterance?.(downsampled);
+      // The caller owns the state now (ASR may already be running).
+    }
+  }
+
+  resetDetector() {
+    this.vad.reset();
+  }
+
+  forceUtterance() {
+    if (!this.context) return null;
+    const audio = this.vad.forceCurrentUtterance();
+    if (!audio || !audio.length) return null;
+    const downsampled = resampleLinear(audio, this.context.sampleRate, 16000);
+    if (downsampled.length < 16000 * 0.32) return null;
+    this.onState?.('listening');
+    return downsampled;
+  }
+
+  async ensureActive() {
+    if (this.context && this.context.state === 'suspended') {
+      await withTimeout(
+        this.context.resume(),
+        5000,
+        'マイク音声処理を再開できませんでした。「会話を始める」をもう一度押してください。'
+      );
+    }
+  }
+
+  async stop() {
+    this.generation++;
+    this.vadAbort?.abort();
+    this.vadAbort=null;
+    this.node?.disconnect();
+    this.stream?.getTracks().forEach((t) => t.stop());
+    if (this.context && this.context.state !== 'closed') await this.context.close();
+    this.stream = null;
+    this.context = null;
+    this.node = null;
+    this.vad.reset();
+    this.vad.close?.();
+  }
+}
+
+export class AdaptiveEndpointDetector {
+  constructor() { this.reset(); }
+  reset() {
+    this.noiseFloor = 0.006;
+    this.preRoll = [];
+    this.preRollSamples = 0;
+    this.inSpeech = false;
+    this.frames = [];
+    this.speechStartAt = 0;
+    this.lastVoiceAt = 0;
+    this.aboveSince = 0;
+  }
+  resetSpeechOnly() {
+    this.inSpeech = false;
+    this.frames = [];
+    this.aboveSince = 0;
+    this.preRoll = [];
+    this.preRollSamples = 0;
+  }
+  forceCurrentUtterance() {
+    const chunks = this.inSpeech ? this.frames : this.preRoll;
+    const audio = chunks.length ? concatFloat32(chunks) : null;
+    this.resetSpeechOnly();
+    return audio;
+  }
+  push(frame, sampleRate, now) {
+    const rms = rootMeanSquare(frame);
+    const speechThreshold = Math.max(0.012, this.noiseFloor * 3.0);
+    const silenceThreshold = Math.max(0.008, this.noiseFloor * 1.65);
+
+    if (!this.inSpeech && rms < speechThreshold) {
+      const capped = Math.min(rms, 0.04);
+      this.noiseFloor = this.noiseFloor * 0.985 + capped * 0.015;
+    }
+
+    if (!this.inSpeech) {
+      this.preRoll.push(frame);
+      this.preRollSamples += frame.length;
+      const target = Math.floor(sampleRate * 0.35);
+      while (this.preRollSamples > target && this.preRoll.length > 1) {
+        this.preRollSamples -= this.preRoll[0].length;
+        this.preRoll.shift();
+      }
+
+      if (rms >= speechThreshold) {
+        if (!this.aboveSince) this.aboveSince = now;
+        if (now - this.aboveSince >= 110) {
+          this.inSpeech = true;
+          this.speechStartAt = this.aboveSince;
+          this.lastVoiceAt = now;
+          this.frames = [...this.preRoll];
+          this.preRoll = [];
+          this.preRollSamples = 0;
+          return { event: 'speech-start' };
+        }
+      } else {
+        this.aboveSince = 0;
+      }
+      return { event: 'none' };
+    }
+
+    this.frames.push(frame);
+    if (rms >= silenceThreshold) this.lastVoiceAt = now;
+    const speechMs = now - this.speechStartAt;
+    const silenceMs = now - this.lastVoiceAt;
+    const neededSilence = speechMs < 2000 ? 850 : speechMs < 4000 ? 1100 : speechMs < 8000 ? 1400 : 1750;
+    if ((speechMs > 320 && silenceMs >= neededSilence) || speechMs >= 30000) {
+      const audio = concatFloat32(this.frames);
+      this.inSpeech = false;
+      this.frames = [];
+      this.aboveSince = 0;
+      return { event: 'utterance', audio };
+    }
+    return { event: 'none' };
+  }
+}
+
+function rootMeanSquare(frame) {
+  let sum = 0;
+  for (let i = 0; i < frame.length; i++) sum += frame[i] * frame[i];
+  return Math.sqrt(sum / Math.max(1, frame.length));
+}
+function concatFloat32(chunks) {
+  const length = chunks.reduce((n, c) => n + c.length, 0);
+  const out = new Float32Array(length);
+  let offset = 0;
+  for (const c of chunks) { out.set(c, offset); offset += c.length; }
+  return out;
+}
+function resampleLinear(input, sourceRate, targetRate) {
+  if (sourceRate === targetRate) return input.slice();
+  const ratio = sourceRate / targetRate;
+  const length = Math.floor(input.length / ratio);
+  const out = new Float32Array(length);
+  for (let i = 0; i < length; i++) {
+    const p = i * ratio;
+    const a = Math.floor(p);
+    const b = Math.min(a + 1, input.length - 1);
+    const t = p - a;
+    out[i] = input[a] * (1 - t) + input[b] * t;
+  }
+  return out;
+}
+
+
+function withTimeout(promise, ms, message) {
+  let timer;
+  const timeout = new Promise((_, reject) => {
+    timer = setTimeout(() => reject(new Error(message)), ms);
+  });
+  return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
+}
