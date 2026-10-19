@@ -1,6 +1,6 @@
 {
   "sourceRepository": "eltnegcellist/Web_EmmaLocal_English_for_babies",
-  "sourceCommit": "ea0c9e1a70fafa2e6d3ee8deb914c99d38f698fe",
+  "sourceCommit": "b5835da2abc9f06488f92f0deb069adda5f61fc2",
   "reviewPullRequest": 107,
   "artifactSHA256": "89a0392a0f165cb7251dcc2c0291346e44c110c36b252a51af15b1975e912c46",
   "stills": 22,
@@ -88,7 +88,7 @@
     "assets/voice-1202/clips/dd7d85d9f96cde8534d401f8.m4a": "b147943df8571ddd3805c0a25995873c575d51d9d51729d5e60556073a812c8a",
     "assets/voice-1202/clips/f57248e951ac3c1f7db397a5.m4a": "8fd1da00fc70b6f2438221a2cebaedde0bb5461ac56954c9f19651f665b50afd",
     "shared/visual-cue-ui-examples.json": "289e61201ed5151dd720faf8f2564137f829b7716b7a2bdac2dfbcb2275846cc",
-    "src/emma-gestures.js": "5a20d2195e24f8dca9aa9e8098272162a93c9b52fcb70c48564ce0d964c40d16",
+    "src/emma-gestures.js": "47f81d69b0cc9d578e4acfb823c525a4ec343d9a186099d5e77b13fd1f118691",
     "src/visual-cue-catalog.js": "7a9a1073c615ee551b4962a2399dff23b2dfee6a302b002663c6d0e58ca8ac65",
     "src/visual-cue-controller.js": "353923b4d041116c6b663de785b4914df55840a31ceaff2b9a64ade54889d95d",
     "src/visual-cue-ui-preview.js": "a97e4a4c69b8375ac0f0beca124949ce0f2891857e9e1be8aabfc2eded6b48cd"
