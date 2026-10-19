@@ -1,6 +1,6 @@
 {
   "sourceRepository": "eltnegcellist/Web_EmmaLocal_English_for_babies",
-  "sourceCommit": "144dd57f5f26b6ae3e981c070d747d56972cf7c1",
+  "sourceCommit": "ea0c9e1a70fafa2e6d3ee8deb914c99d38f698fe",
   "reviewPullRequest": 107,
   "artifactSHA256": "89a0392a0f165cb7251dcc2c0291346e44c110c36b252a51af15b1975e912c46",
   "stills": 22,
@@ -9,7 +9,7 @@
   "nonRuntime": true,
   "uiPreview": "ui.html",
   "uiFileSHA256": {
-    "ui.html": "a57b5a2cb35226fa09891bf13359214522cb1e2ec4910a3ee6abebb7f715c111",
+    "ui.html": "42c013e8ee8cc451dfe5c3fecc62fa1fd3d8781bb045d31edcf175e3e7f69621",
     "assets/emma-face/emma-face-idle-open.svg": "2e82d8a84c4740a21ddfdf3c7c416b2a547908ded86b8618bd1c50534ae734b0",
     "assets/visual-cue/artwork/animations/care-burp.webp": "ef1b17fcc7bdc0dd446b88209992aba594832a8dfac46a54574e7406d33456aa",
     "assets/visual-cue/artwork/animations/care-wipe.webp": "beb3c60f75bb250556a4a7f1680b31f5ccfde3df7671a4174ff6a845196c5dba",
@@ -88,10 +88,10 @@
     "assets/voice-1202/clips/dd7d85d9f96cde8534d401f8.m4a": "b147943df8571ddd3805c0a25995873c575d51d9d51729d5e60556073a812c8a",
     "assets/voice-1202/clips/f57248e951ac3c1f7db397a5.m4a": "8fd1da00fc70b6f2438221a2cebaedde0bb5461ac56954c9f19651f665b50afd",
     "shared/visual-cue-ui-examples.json": "289e61201ed5151dd720faf8f2564137f829b7716b7a2bdac2dfbcb2275846cc",
-    "src/emma-gestures.js": "44d4edf9fd36b5dacc1f6208bac4120939b1eb8d71cb7fe49b4d885dbe6aab99",
+    "src/emma-gestures.js": "5a20d2195e24f8dca9aa9e8098272162a93c9b52fcb70c48564ce0d964c40d16",
     "src/visual-cue-catalog.js": "7a9a1073c615ee551b4962a2399dff23b2dfee6a302b002663c6d0e58ca8ac65",
-    "src/visual-cue-controller.js": "a0ec62645bab1a9e5f580b82abf65ee503d42964597a85592028ffd58acd124c",
-    "src/visual-cue-ui-preview.js": "7a86ec5f89d9321bb7470fcfa7bddc25bd7c70db7b3c49fd5436ce6d82be68df"
+    "src/visual-cue-controller.js": "353923b4d041116c6b663de785b4914df55840a31ceaff2b9a64ade54889d95d",
+    "src/visual-cue-ui-preview.js": "a97e4a4c69b8375ac0f0beca124949ce0f2891857e9e1be8aabfc2eded6b48cd"
   },
   "emmaGestureCandidates": 7,
   "applicationDeployed": false
