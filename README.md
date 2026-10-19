@@ -4,7 +4,7 @@
 
 静止画と動作を比較する採用審査用ページです。制作元は
 [Web_EmmaLocal_English_for_babies / PR #107](https://github.com/eltnegcellist/Web_EmmaLocal_English_for_babies/pull/107)。
-審査候補であり、採用承認は0件です。アプリ本体やEmmaの表示切替は含みません。
+採用済み素材と旧版を区別するプレビューです。採用数はdeployment.jsonを参照してください。アプリ本体やEmmaの表示切替は含みません。
 
 公開元は `gh-pages` ブランチのルートです。`index.html` は動画を内包した単一HTMLで、
 GitHub Pagesでもローカルのファイルとしても閲覧できます。

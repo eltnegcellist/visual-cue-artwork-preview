@@ -1,10 +1,10 @@
 {
   "sourceRepository": "eltnegcellist/Web_EmmaLocal_English_for_babies",
-  "sourceCommit": "44348eab3d3727304259ade91369cce9244130ae",
+  "sourceCommit": "acaf5621b4e804d3515c36eff9c1af26538d12ca",
   "reviewPullRequest": 107,
-  "artifactSHA256": "c25fbcc23a25246c3afe9abf8ff5aa75ff54bbfcdc2934fb2b2e056edfcbb8d4",
+  "artifactSHA256": "a790277eae0fcfa0b0a82717cd9b9e23c89b291c3e2110f43ba62d1190e19058",
   "stills": 22,
   "animations": 21,
-  "accepted": 0,
+  "accepted": 43,
   "nonRuntime": true
 }
