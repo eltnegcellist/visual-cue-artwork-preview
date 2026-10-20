@@ -2,6 +2,13 @@
 
 [プレビューを開く](https://eltnegcellist.github.io/visual-cue-artwork-preview/)
 
+[実装したアプリ本体を開く](https://eltnegcellist.github.io/visual-cue-artwork-preview/app/)
+
+`app/` は通常の初回準備、マイク会話、押して聞く、設定を使える本体です。
+英文選択パネルやテスト専用の起動処理はありません。Visual Cueは初期オンです。
+同一ドメインの本番アプリと設定・履歴が混ざらない保存先を使います。
+mainを変更せず、作業ブランチの本体をこの専用URLへ公開しています。
+
 静止画と動作を比較する採用審査用ページです。制作元は
 [Web_EmmaLocal_English_for_babies / PR #107](https://github.com/eltnegcellist/Web_EmmaLocal_English_for_babies/pull/107)。
 採用済み素材と旧版を区別するプレビューです。採用数はdeployment.jsonを参照してください。
