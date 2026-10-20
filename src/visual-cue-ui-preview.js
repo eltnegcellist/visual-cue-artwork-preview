@@ -1,4 +1,4 @@
-import {createVisualCueController} from './visual-cue-controller.js?v=20261020-hug-face-motion-v1';
+import {createVisualCueController} from './visual-cue-controller.js?v=20261020-hold-until-parent-v1';
 import {createEmmaBackground} from './emma-background-cues.js?v=20261020-hug-face-motion-v1';
 import {loadEmmaFrames,createEmmaPreviewMotion} from './emma-preview-motion.js?v=20261020-hug-face-motion-v1';
 const $=id=>document.getElementById(id);
