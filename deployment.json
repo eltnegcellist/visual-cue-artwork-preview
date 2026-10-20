@@ -2633,7 +2633,7 @@
     "app/icons/mitsukotoba-baby-abc-v2-192.png": "0765aee172684c6bdfc94539fcbbe457351dcae05a486f03a47065f393403409",
     "app/icons/mitsukotoba-english.svg": "b84811bc672e2e303dbce5a07f4f60fc062d7461df7b249daeb7fb096ec2c9b2",
     "app/icons/mitsukotoba.png": "cd03490487583a966701df0c7a992a529315b1e686e3c5183266418962fd2521",
-    "app/index.html": "7558fed4624fe4bd435e39a0808c221a71383f751a9fd93d2880649a228a6604",
+    "app/index.html": "5a2af5491223c6e443fd61c2bac18df4f2f769cfb60c313ca8b04160883e1a6a",
     "app/licenses/multilingual/E5-MIT.txt": "b5cb7ff7859e7d282d98fc43ab081b0dda5dc659dc3385cf65740c759a7e6a6c",
     "app/licenses/multilingual/NOTICE.md": "ec2749c3cb4442dc9b42cadf1330000c58df67c7a31d5ef16c3f23fd0593e593",
     "app/licenses/multilingual/ONNXRUNTIME.txt": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c",
@@ -2680,10 +2680,10 @@
     "app/semantic-assets/ruri70-int8-bd500193/tokenizer.json": "0a94ac9a0a02c067bdef25b72ae9f4ee33f48f552e55988d444f6d25eeb1d062",
     "app/semantic-assets/ruri70-int8-bd500193/tokenizer_config.json": "34004511993472f15c7202074284c57788c161fb6567de164b8e0c0266f155e4",
     "app/semantic-test.html": "49c19ee7cadbba437b180cc05feeb29070927929ef8cb7c8144c0f841180e99f",
-    "app/service-worker.js": "4abf1a84c7f2ce48607cb8b07a489833c29b005d49e5fbc2f9f26568be3dbe4a",
+    "app/service-worker.js": "f29c2df1db05506a10334af552b9edd422637528a220ec43dd1b058421021685",
     "app/shared/play-topics.json": "3065cd5f8614cc5fe82fb2d1233e89c7b497b8ae6e04ae851086da02a4967403",
     "app/src/app-navigation.js": "0ca687fb1e883c642cbb1f39d7cd395fdc24511eccce7117f7ec2b4db2ce2d0a",
-    "app/src/app.js": "663fcad7583ecc1a92be9cbaa75284a07cc0688b8f1729071056b9502d2d34d3",
+    "app/src/app.js": "59aa4b0ac06ab352b7c2ecab1e95bd03fec9ffd0b518db89310a465d737595b7",
     "app/src/asr-client.js": "8d5f2b4f4ba1c242f103153996f53e64ce294d3fbc6466c54db2af9d20162582",
     "app/src/asr-worker.js": "7409cb9c708aeeff4fe8159189608c670946511412d2cfea07251f5f2e19b96d",
     "app/src/audio-capture.js": "bb81a30edf6e909c5077edb68fb0dc585836d70f0c6050d2852fcd6593364d3c",
@@ -2717,7 +2717,7 @@
     "app/src/multilingual/translations.js": "e7f962954920a7a9cde7e2c6eba73d6617131a05d5bcd6c0c6f541f2d0e58bea",
     "app/src/multilingual/ui.js": "20cc2d53a71604709babdb90f91c8de307a129ec60926d7843d104c45b1dc8fe",
     "app/src/multilingual/worker.js": "495ee5b0e6182bc59b55941b49adc33bb7b02269b6d3ba9a65b1577203587c38",
-    "app/src/prerecorded-voice.js": "3e076a364366db322c2a69e2d441671c6c724c542db4e01cab976b60a00ad904",
+    "app/src/prerecorded-voice.js": "dbd2780f21e2f09b419d06fb0c6571d1d82efabe24e6483ae8c39fcd584aa0d3",
     "app/src/reply-display-hint.js": "f5bfabf6169e503679f7437740149f27530acd45b7da98fd0654d409e24b6394",
     "app/src/resumable-download.js": "60077c772956892f6cc21c19743b32ae5a1eb70ac8f7c658bbf048ed64450ba7",
     "app/src/semantic-assets-manifest.json": "2e37ac8040db66618160a4df3b1d0ddd86531dc7224be7c6c059bf3ef6ae1509",
@@ -2731,7 +2731,7 @@
     "app/src/silero-capture.js": "608ad057b38d7949dee4ea7923adf5935f4714393425eb6c8d514eda2ca336c5",
     "app/src/silero-endpoint.js": "501de27900ce22cf427efb7dcc50160cdc1d4cdd615086b63af0189214adf8b8",
     "app/src/silero-worker.js": "c0d87d128293c738fc6cd1937e2008cda461408d1116d72b05ec7d12611ddf13",
-    "app/src/tts-worker.js": "aabb1de869496dadfe7728d7c8b2de91ed1dd80cdfc5119b9c33c6d79aa8b77d",
+    "app/src/tts-worker.js": "4fc583a23ffd05e512ef8f0d5766913d72dd8af401f3c9b458370c50109722d3",
     "app/src/turn-revisions.js": "e00d7aa3c0fae23dfab8abcc2f5f2a7f1def168444eb0a952d4270aa44e1f017",
     "app/src/vendor/moonshine/LICENSE": "fa7d1174dd8af6a7cd280be20b80d10095ed4c19b5b20b61a7715c3ad790dc5f",
     "app/src/vendor/moonshine/agent-flow.js": "8435b476ef927c5422a20632b1b75b8ed83a896e6bb13af9b85ed5e4d3fadd24",
@@ -2769,7 +2769,8 @@
     "app/src/voice-diagnostic.js": "22a3c95ce6d76146e457c7b3236de21b6f6acd1d7fa5a05b20c270ae9ae5a447",
     "app/styles.css": "f4c7386459796ef6666cc1e0c1a847d277889f9aea28becebf70e50aa4231579",
     "app/topic-guide.html": "a23760278e51a42427cc5cf4d9dd4454617b53436732116d1090716892b04a89",
-    "app/worklets/pcm-capture-worklet.js": "038e8e7d5c16a62fd4f87a1aea707436bdaf429e41f87b73da7f275cc30f139b"
+    "app/worklets/pcm-capture-worklet.js": "038e8e7d5c16a62fd4f87a1aea707436bdaf429e41f87b73da7f275cc30f139b",
+    "app/VOICE_PROGRESSIVE_TEST_DEPLOYED.json": "77d1518001125972bf4f3c9016793d1921f627a519bdfef40e3ee240b864c30d"
   },
   "sceneMotionCandidates": 7,
   "emmaGestureCandidates": 0,
@@ -2778,5 +2779,21 @@
   "applicationDeployed": true,
   "productionApplicationDeployed": false,
   "trialApplicationDeployed": true,
-  "mainMerged": false
+  "mainMerged": false,
+  "previewOverlays": [
+    {
+      "description": "Preserve the previously published preview-only progressive voice changes while updating the normal app settings and Whisper main changes.",
+      "sourcePagesCommit": "cb9f0658d839fb54b9cb0ff36a9b345d7d4f3c55",
+      "pullRequest": "https://github.com/eltnegcellist/Web_EmmaLocal_English_for_babies/pull/127",
+      "basePagesCommit": "1ee7d4368ea76d19b67ec2455755e315bf7afa66",
+      "files": {
+        "app/index.html": "5a2af5491223c6e443fd61c2bac18df4f2f769cfb60c313ca8b04160883e1a6a",
+        "app/service-worker.js": "f29c2df1db05506a10334af552b9edd422637528a220ec43dd1b058421021685",
+        "app/src/app.js": "59aa4b0ac06ab352b7c2ecab1e95bd03fec9ffd0b518db89310a465d737595b7",
+        "app/src/prerecorded-voice.js": "dbd2780f21e2f09b419d06fb0c6571d1d82efabe24e6483ae8c39fcd584aa0d3",
+        "app/src/tts-worker.js": "4fc583a23ffd05e512ef8f0d5766913d72dd8af401f3c9b458370c50109722d3",
+        "app/VOICE_PROGRESSIVE_TEST_DEPLOYED.json": "77d1518001125972bf4f3c9016793d1921f627a519bdfef40e3ee240b864c30d"
+      }
+    }
+  ]
 }
