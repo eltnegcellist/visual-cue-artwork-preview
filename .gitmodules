@@ -1,3 +1,7 @@
 [submodule "whisper-speed-test"]
 	path = whisper-speed-test
 	url = https://github.com/eltnegcellist/Web_EmmaLocal_English_for_babies.git
+
+[submodule "multilingual-adaptive-test"]
+	path = multilingual-adaptive-test
+	url = https://github.com/eltnegcellist/Web_EmmaLocal_English_for_babies.git
